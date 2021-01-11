@@ -1,5 +1,5 @@
 {
-  "name": "urlshortener",
+  "name": "url-shortener",
   "version": "1.0.0",
   "description": "Mern URL Shortener",
   "main": "app.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/netzcat/url-shortener.git"
+    "url": "https://github.com/netzcat/UrlShortener.git"
   },
   "author": "Maryanna Batischev <netzzzcat@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/netzcat/url-shortener/issues"
+    "url": "https://github.com/netzcat/UrlShortener/issues"
   },
-  "homepage": "https://github.com/netzcat/url-shortener#readme",
+  "homepage": "https://github.com/netzcat/UrlShortener#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.3.3",

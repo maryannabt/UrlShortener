@@ -1,0 +1,31 @@
+{
+  "name": "urlshortener",
+  "version": "1.0.0",
+  "description": "Mern URL Shortener",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/netzcat/url-shortener.git"
+  },
+  "author": "Maryanna Batischev <netzzzcat@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/netzcat/url-shortener/issues"
+  },
+  "homepage": "https://github.com/netzcat/url-shortener#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.3",
+    "express": "^4.17.1",
+    "express-validator": "^6.9.2",
+    "mongoose": "^5.11.11"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.7"
+  }
+}

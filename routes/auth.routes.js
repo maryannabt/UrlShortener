@@ -1,41 +1,21 @@
 const { Router } = require('express');
-const bcrypt = require('bcryptjs');
+const { check } = require('express-validator');
 
-const User = require('../models/User');
-const HttpError = require('../models/http-error');
+const usersController = require('../controllers/users-controllers');
 
 const router = Router();
 
-router.post('/register', async (req, res, next) => {
-    try {
+router.post(
+  '/register',
+  [
+    check('email')
+      .normalizeEmail()
+      .isEmail(),
+    check('password').isLength({ min: 6 })
+  ],
+  usersController.register
+);
 
-       const { email, password } = req.body;
-
-       const existingUser = await User.findOne({ email });
-
-       if (existingUser) {
-            const error = new HttpError(
-                'User exists already, please login instead.',
-                422
-            );
-            return next(error);
-       }
-
-       const hashedPassword = await bcrypt.hash(password, 12);
-
-       const createdUser = new User({ email, password: hashedPassword });
-
-       await createdUser.save();
-
-       res.status(201).json({ user: createdUser });
-
-    } catch (e) {
-       return next(new HttpError('Something went wrong. Please try again.', 500));
-    }
-});
-
-router.post('/login', async (req, res, next) => {
-
-});
+router.post('/login', usersController.login);
 
 module.exports = router;

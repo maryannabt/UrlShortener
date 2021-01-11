@@ -1,11 +1,14 @@
 const express = require('express');
 const config = require('config');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const userRoutes = require('./routes/auth.routes');
 const HttpError = require('./models/http-error');
 
 const app = express();
+
+app.use(bodyParser.json());
 
 app.use('/api/auth', userRoutes);
 
@@ -35,8 +38,8 @@ async function start() {
 
         app.listen(PORT, () => console.log(`App in running on port ${PORT}`));
 
-    } catch (e) {
-        console.log('Server Error', e.message);
+    } catch (error) {
+        console.log('Server Error', error.message);
     }
 }
 

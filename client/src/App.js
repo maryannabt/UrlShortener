@@ -13,7 +13,7 @@ import NewLink from './pages/NewLink';
 import LinkInfo from './pages/LinkInfo';
 
 const App = () => {
-  const token = true;
+  const token = false;
 
   let routes;
 
@@ -26,7 +26,7 @@ const App = () => {
         <Route path="/links/new" exact>
           <NewLink />
         </Route>
-        <Route path="/info/:linkId">
+        <Route path="/links/:linkId">
           <LinkInfo />
         </Route>
         <Redirect to="/links/new" />
@@ -35,10 +35,10 @@ const App = () => {
   } else {
     routes = (
     <Switch>
-      <Route path="/" exact>
+      <Route path="/auth" exact>
         <Auth />
       </Route>
-      <Redirect to="/" />
+      <Redirect to="/auth" />
     </Switch>
     );
   }

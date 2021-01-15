@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import Input from '../components/Input';
+import Loader from '../components/Loader';
 import {
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH
@@ -75,6 +76,7 @@ const Auth = () => {
       <div className="col s6 offset-s3">
         <h1 style={{display: 'flex', justifyContent: 'center'}}>URL Shortener</h1>
         <div className="card blue darken-1">
+        {isLoading && <Loader asOverlay />}
         <form onSubmit={authSubmitHandler}>
           <div className="card-content white-text">
             <span className="card-title">Login Required</span>

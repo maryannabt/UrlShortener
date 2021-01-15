@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import Input from '../components/Input';
 import Loader from '../components/Loader';
+import ErrorModal from '../components/ErrorModal';
 import {
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH
@@ -28,8 +29,8 @@ const Auth = () => {
   );
 
   useEffect(() => {
-    window.M.updateTextFields()
-  }, [])
+    window.M.updateTextFields();
+  }, []);
 
   const switchModeHandler = () => {
     setIsLoginMode(prevMode => !prevMode);
@@ -72,6 +73,8 @@ const Auth = () => {
   };
 
   return (
+  <React.Fragment>
+    {error && <ErrorModal error={error} onClear={clearError} />}
     <div className="row">
       <div className="col s6 offset-s3">
         <h1 style={{display: 'flex', justifyContent: 'center'}}>URL Shortener</h1>
@@ -119,7 +122,8 @@ const Auth = () => {
         </div>
       </div>
      </div>
-  )
-}
+  </React.Fragment>
+  );
+};
 
 export default Auth;

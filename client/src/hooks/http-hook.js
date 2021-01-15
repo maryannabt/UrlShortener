@@ -41,9 +41,7 @@ export const useHttpClient = () => {
     []
   );
 
-  const clearError = () => {
-    setError(null);
-  };
+  const clearError = useCallback(() => setError(null), []);
 
   useEffect(() => {
     return () => {

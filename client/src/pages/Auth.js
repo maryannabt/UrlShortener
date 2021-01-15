@@ -6,9 +6,11 @@ import {
   VALIDATOR_MINLENGTH
 } from '../utils/validators';
 import { useForm } from '../hooks/form-hook';
+import { useHttpClient } from '../hooks/http-hook';
 
 const Auth = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const [formState, inputHandler] = useForm(
     {
@@ -37,13 +39,33 @@ const Auth = () => {
 
     if (isLoginMode) {
       try {
-        console.log("Logged In!");
-        console.log(formState.inputs);
+        const responseData = await sendRequest(
+          '/api/auth/login',
+          'POST',
+          JSON.stringify({
+            email: formState.inputs.email.value,
+            password: formState.inputs.password.value
+          }),
+          {
+            'Content-Type': 'application/json'
+          }
+        );
+        console.log("Logged In!", responseData);
       } catch (err) {}
     } else {
       try {
-        console.log("Registered!");
-        console.log(formState.inputs);
+        const responseData = await sendRequest(
+          '/api/auth/register',
+          'POST',
+          JSON.stringify({
+            email: formState.inputs.email.value,
+            password: formState.inputs.password.value
+          }),
+          {
+            'Content-Type': 'application/json'
+          }
+        );
+        console.log("Registered!", responseData);
       } catch (err) {}
     }
   };
@@ -51,7 +73,7 @@ const Auth = () => {
   return (
     <div className="row">
       <div className="col s6 offset-s3">
-        <h1>URL Shortener</h1>
+        <h1 style={{display: 'flex', justifyContent: 'center'}}>URL Shortener</h1>
         <div className="card blue darken-1">
         <form onSubmit={authSubmitHandler}>
           <div className="card-content white-text">
@@ -77,7 +99,7 @@ const Auth = () => {
           <div className="card-action">
             <button
               type="submit"
-              className="btn yellow darken-4"
+              className="btn deep-purple lighten-1"
               disabled={!formState.isValid}
             >
               {isLoginMode ? 'LOGIN' : 'REGISTRATION'}

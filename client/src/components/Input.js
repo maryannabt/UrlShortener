@@ -52,7 +52,7 @@ const Input = props => {
   return (
     <div className="input-field">
       <input
-        className={`yellow-input ${(!inputState.isValid && inputState.isTouched) ? 'invalid' : 'valid'}`}
+        className={`lime-input ${(!inputState.isValid && inputState.isTouched) ? 'invalid' : 'valid'}`}
         id={props.id}
         type={props.type}
         placeholder={props.placeholder}

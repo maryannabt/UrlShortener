@@ -3,14 +3,16 @@ const config = require('config');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-const userRoutes = require('./routes/auth.routes');
+const authRoutes = require('./routes/auth-routes');
+const linkRoutes = require('./routes/link-routes');
 const HttpError = require('./models/http-error');
 
 const app = express();
 
 app.use(bodyParser.json());
 
-app.use('/api/auth', userRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/link', linkRoutes);
 
 app.use((req, res, next) => {
   const error = new HttpError('Could not find this route.', 404);

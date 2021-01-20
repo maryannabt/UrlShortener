@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import Input from '../components/Input';
 import Loader from '../components/Loader';
@@ -9,8 +9,10 @@ import {
 } from '../utils/validators';
 import { useForm } from '../hooks/form-hook';
 import { useHttpClient } from '../hooks/http-hook';
+import { AuthContext } from '../context/auth-context';
 
 const Auth = () => {
+  const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
@@ -52,7 +54,8 @@ const Auth = () => {
             'Content-Type': 'application/json'
           }
         );
-        console.log("Logged In!", responseData);
+
+        auth.login(responseData.userId, responseData.token);
       } catch (err) {}
     } else {
       try {
@@ -67,7 +70,8 @@ const Auth = () => {
             'Content-Type': 'application/json'
           }
         );
-        console.log("Registered!", responseData);
+        
+        auth.login(responseData.userId, responseData.token);
       } catch (err) {}
     }
   };

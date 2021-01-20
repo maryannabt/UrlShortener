@@ -11,9 +11,12 @@ import Auth from './pages/Auth';
 import Links from './pages/Links';
 import NewLink from './pages/NewLink';
 import LinkInfo from './pages/LinkInfo';
+import { useAuth } from './hooks/auth-hook';
+import { AuthContext } from './context/auth-context';
 
 const App = () => {
-  const token = false;
+  const { token, login, logout, userId } = useAuth();
+  const isLoggedIn = !!token;
 
   let routes;
 
@@ -44,11 +47,20 @@ const App = () => {
   }
 
   return (
-    <Router>
-      <div className="container">
-        {routes}
-      </div>
-    </Router>
+    <AuthContext.Provider
+      value={{
+        token: token,
+        userId: userId,
+        login: login,
+        logout: logout
+      }}
+    >
+      <Router>
+        <div className="container">
+          {routes}
+        </div>
+      </Router>
+    </AuthContext.Provider>
   );
 };
 

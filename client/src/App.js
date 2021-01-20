@@ -11,6 +11,7 @@ import Auth from './pages/Auth';
 import Links from './pages/Links';
 import NewLink from './pages/NewLink';
 import LinkInfo from './pages/LinkInfo';
+import Navbar from './components/Navbar'
 import { useAuth } from './hooks/auth-hook';
 import { AuthContext } from './context/auth-context';
 
@@ -56,6 +57,7 @@ const App = () => {
       }}
     >
       <Router>
+        { isLoggedIn && <Navbar /> }
         <div className="container">
           {routes}
         </div>

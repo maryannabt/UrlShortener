@@ -2,6 +2,7 @@ import React from 'react';
 
 const Loader = props => {
   const { asOverlay } = props;
+
   const asOverlayStyles = {
     height: '100%',
     width: '100%',
@@ -14,6 +15,7 @@ const Loader = props => {
     alignItems: 'center',
     zIndex: '10'
   };
+  
   const regularStyles = {
     display: 'flex', 
     justifyContent: 'center', 

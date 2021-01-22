@@ -1,4 +1,5 @@
 const { validationResult } = require('express-validator');
+const mongoose = require('mongoose');
 const config = require('config');
 const shortid = require('shortid');
 
@@ -24,7 +25,7 @@ const generateLink = async (req, res, next) => {
     }
 
     if (existingLink) {
-        return res.json({ link: existingLink });
+        return res.json({ link: existingLink.toObject({ getters: true }) });
     }
 
     const baseUrl = config.get('baseUrl');
@@ -60,7 +61,7 @@ const generateLink = async (req, res, next) => {
         return next(error);
       }
     
-      res.status(201).json({ link: createdLink });
+      res.status(201).json({ link: createdLink.toObject({ getters: true }) });
 };
 
 const getLinks = async (req, res, next) => {

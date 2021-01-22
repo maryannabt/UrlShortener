@@ -49,10 +49,7 @@ const Auth = () => {
           JSON.stringify({
             email: formState.inputs.email.value,
             password: formState.inputs.password.value
-          }),
-          {
-            'Content-Type': 'application/json'
-          }
+          })
         );
 
         auth.login(responseData.userId, responseData.token);
@@ -65,10 +62,7 @@ const Auth = () => {
           JSON.stringify({
             email: formState.inputs.email.value,
             password: formState.inputs.password.value
-          }),
-          {
-            'Content-Type': 'application/json'
-          }
+          })
         );
         
         auth.login(responseData.userId, responseData.token);
@@ -91,6 +85,7 @@ const Auth = () => {
                 id="email"
                 type="email"
                 label="E-Mail"
+                className="lime"
                 validators={[VALIDATOR_EMAIL()]}
                 errorText="Please enter a valid email address."
                 onInput={inputHandler}
@@ -100,6 +95,7 @@ const Auth = () => {
                 id="password"
                 type="password"
                 label="Password"
+                className="lime"
                 validators={[VALIDATOR_MINLENGTH(6)]}
                 errorText="Please enter a valid password, at least 6 characters."
                 onInput={inputHandler}

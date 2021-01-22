@@ -7,6 +7,7 @@ export const useAuth = () => {
   const [token, setToken] = useState(false);
   const [tokenExpirationDate, setTokenExpirationDate] = useState();
   const [userId, setUserId] = useState(false);
+  const [ready, setReady] = useState(false);
 
   const login = useCallback((uid, token, expirationDate) => {
     setToken(token);
@@ -49,7 +50,9 @@ export const useAuth = () => {
     ) {
       login(storedData.userId, storedData.token, new Date(storedData.expiration));
     }
+
+    setReady(true);
   }, [login]);
 
-  return { token, login, logout, userId };
+  return { token, login, logout, userId, ready };
 };

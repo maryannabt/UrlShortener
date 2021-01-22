@@ -9,6 +9,8 @@ export const useHttpClient = () => {
   const sendRequest = useCallback(
     async (url, method = 'GET', body = null, headers = {}) => {
       setIsLoading(true);
+      
+      headers['Content-Type'] = 'application/json';
       const httpAbortCtrl = new AbortController();
       activeHttpRequests.current.push(httpAbortCtrl);
 

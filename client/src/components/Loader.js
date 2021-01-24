@@ -19,7 +19,10 @@ const Loader = props => {
   const regularStyles = {
     display: 'flex', 
     justifyContent: 'center', 
-    paddingTop: '2rem'
+    alignItems: 'center',
+    position: 'absolute',
+    top: 'calc(50% - 64px)',
+    left: 'calc(50% - 64px)'
   };
 
   return (

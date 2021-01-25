@@ -14,7 +14,7 @@ const LinkInfo = () => {
     const linkId = useParams().linkId;
 
     useEffect(() => {
-        const fetchLinks = async () => {
+        const fetchLink = async () => {
           try {
             const responseData = await sendRequest(`/api/link/${linkId}`, 'GET', null, {
                 Authorization: 'Bearer ' + auth.token
@@ -24,7 +24,7 @@ const LinkInfo = () => {
           } catch (err) {}
         };
 
-        fetchLinks();
+        fetchLink();
     }, [sendRequest, linkId, auth.token]);
 
     if (isLoading) {

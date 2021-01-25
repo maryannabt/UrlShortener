@@ -16,18 +16,6 @@ const generateLink = async (req, res, next) => {
 
     const { from } = req.body;
 
-    let existingLink;
-    try {
-        existingLink = await Link.findOne({ from });
-    } catch (err) {
-        const error = new HttpError('Generating link failed, please try again.', 500);
-        return next(error);
-    }
-
-    if (existingLink) {
-        return res.json({ link: existingLink.toObject({ getters: true }) });
-    }
-
     const baseUrl = config.get('baseUrl');
     const code = shortid.generate();
     const to = baseUrl + '/t/' + code;
@@ -65,9 +53,11 @@ const generateLink = async (req, res, next) => {
 };
 
 const getLinks = async (req, res, next) => {
+    const userId = req.userData.userId;
+
     let userWithLinks;
     try {
-        userWithLinks = await User.findById(req.userData.userId).populate('links');
+        userWithLinks = await User.findById(userId).populate('links');
     } catch (err) {
         const error = new HttpError('Fetching links failed, please try again later.', 500);
         return next(error);

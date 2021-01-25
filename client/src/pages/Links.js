@@ -39,7 +39,7 @@ const Links = () => {
                     to={'/links/new'}
                     className="btn deep-purple lighten-1"
                   >
-                    Generate Short Link
+                    Create Link
                   </Link>
                 </div>
             </div>

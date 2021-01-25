@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 
 const authRoutes = require('./routes/auth-routes');
 const linkRoutes = require('./routes/link-routes');
+const redirectRoutes = require('./routes/redirect-routes');
 const HttpError = require('./models/http-error');
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(bodyParser.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/link', linkRoutes);
+app.use('/t', redirectRoutes);
 
 app.use((req, res, next) => {
   const error = new HttpError('Could not find this route.', 404);

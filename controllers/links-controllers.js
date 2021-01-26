@@ -1,6 +1,5 @@
 const { validationResult } = require('express-validator');
 const mongoose = require('mongoose');
-const config = require('config');
 const shortid = require('shortid');
 
 const Link = require('../models/Link');
@@ -16,7 +15,7 @@ const generateLink = async (req, res, next) => {
 
     const { from } = req.body;
 
-    const baseUrl = config.get('baseUrl');
+    const baseUrl = process.env.BASE_URL;
     const code = shortid.generate();
     const to = baseUrl + '/t/' + code;
 

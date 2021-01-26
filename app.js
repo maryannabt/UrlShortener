@@ -1,25 +1,31 @@
 const express = require('express');
-const config = require('config');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const authRoutes = require('./routes/auth-routes');
 const linkRoutes = require('./routes/link-routes');
 const redirectRoutes = require('./routes/redirect-routes');
-const HttpError = require('./models/http-error');
+// const HttpError = require('./models/http-error');
 
 const app = express();
 
 app.use(bodyParser.json());
+
+app.use(express.static(path.join("client", "build")));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/link', linkRoutes);
 app.use('/t', redirectRoutes);
 
 app.use((req, res, next) => {
-  const error = new HttpError('Could not find this route.', 404);
-  throw error;
+  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 });
+
+// app.use((req, res, next) => {
+//   const error = new HttpError('Could not find this route.', 404);
+//   throw error;
+// });
 
 app.use((error, req, res, next) => {
   if (res.headerSent) {
@@ -30,11 +36,11 @@ app.use((error, req, res, next) => {
 });
 
 
-const PORT = config.get('port') || 5000;
+const PORT = process.env.PORT || 5000;
 
 async function start() {
     try {
-        await mongoose.connect(config.get('mongoUri'), {
+        await mongoose.connect(process.env.MONGODB_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true

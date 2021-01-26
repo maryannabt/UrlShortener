@@ -1,7 +1,6 @@
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('config');
 
 const User = require('../models/User');
 const HttpError = require('../models/http-error');
@@ -52,7 +51,7 @@ const register = async (req, res, next) => {
     try {
       token = jwt.sign(
         { userId: createdUser.id },
-        config.get('jwtSecret'),
+        process.env.JWT_SECRET,
         { expiresIn: '1h' }
       ); 
     } catch (err) {
@@ -99,7 +98,7 @@ const login = async (req, res, next) => {
     try {
       token = jwt.sign(
         { userId: existingUser.id },
-        config.get('jwtSecret'),
+        process.env.JWT_SECRET,
         { expiresIn: '1h' }
       ); 
     } catch (err) {

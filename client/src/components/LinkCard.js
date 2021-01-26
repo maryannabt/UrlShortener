@@ -2,7 +2,6 @@ import React from 'react';
 
 const LinkCard = ({ link }) => {
     return (
-    <React.Fragment>
       <div style={{paddingTop: '2rem'}}>
         <h2>Link</h2>
 
@@ -11,7 +10,6 @@ const LinkCard = ({ link }) => {
         <p>Number of clicks: <strong>{link.clicks}</strong></p>
         <p>Created on: <strong>{new Date(link.date).toLocaleDateString()}</strong></p>
       </div>
-    </React.Fragment>
     );
 };
 
